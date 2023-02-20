@@ -2,15 +2,18 @@
 
 namespace HackbartPR\Controller;
 
+use HackbartPR\Utils\Message;
 use HackbartPR\Interfaces\Controller;
 use HackbartPR\Repository\PDOVideoRepository;
 
 class ShowVideoController implements Controller
-{
+{   
+    private Message $message;
     private PDOVideoRepository $repository;
 
-    public function __construct(PDOVideoRepository $repository)
+    public function __construct(PDOVideoRepository $repository, Message $message)
     {
+        $this->message = $message; 
         $this->repository = $repository;
     }
 
@@ -20,22 +23,6 @@ class ShowVideoController implements Controller
                 
         require_once __DIR__ . '/../../view/showVideo.php';
 
-        $this->showMessages();
-    }
-    
-    private function showMessages(): void
-    {
-        if (isset($_SESSION['save'])) {
-            if ($_SESSION['save']['status']) { ?>
-                <div class='message success'>
-                    <?= $_SESSION['save']['message']; ?>
-                </div> <?php            
-            } else { ?>
-                <div class='message error'>
-                    <?= $_SESSION['save']['message']; ?>
-                </div> <?php
-            }
-            session_destroy();
-        }
-    }
+        $this->message->show();
+    }        
 }

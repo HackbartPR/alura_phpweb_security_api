@@ -7,4 +7,6 @@ return [
     'GET|/editar' => \HackbartPR\Controller\SendVideoController::class,
     'POST|/editar' => \HackbartPR\Controller\UpdateVideoController::class,
     'GET|/remover' => \HackbartPR\Controller\RemoveVideoController::class,
+    'GET|/login' => \HackbartPR\Controller\LoginController::class,
+    'POST|/login' => \HackbartPR\Controller\VerifyLoginController::class,
 ];
