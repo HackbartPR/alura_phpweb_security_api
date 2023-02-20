@@ -2,18 +2,21 @@
 
 namespace HackbartPR\Controller;
 
+use HackbartPR\Utils\Auth;
 use HackbartPR\Utils\Message;
 use HackbartPR\Repository\PDOUserRepository;
 
 class VerifyLoginController
 {
+    private Auth $auth;
     private Message $message;
     private PDOUserRepository $repository;
 
-    public function __construct(PDOUserRepository $repository ,Message $message)
+    public function __construct(PDOUserRepository $repository ,Message $message, Auth $auth)
     {
         $this->repository = $repository;
         $this->message = $message;
+        $this->auth = $auth;
     }
     
     public function processRequest(): void
@@ -29,6 +32,7 @@ class VerifyLoginController
             $this->message::create($this->message::LOGIN_FAIL, '/login');            
         } 
         
+        $this->auth->login();
         $this->message::create($this->message::LOGIN_SUCCESS);
     }
     

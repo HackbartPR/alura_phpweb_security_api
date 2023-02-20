@@ -27,8 +27,6 @@ class Message
 
     public static function create(string $constant, string $location = null): void
     {   
-        session_start();
-
         $_SESSION['save']['status'] = self::STATUS_MAP[$constant] ?? false;
         $_SESSION['save']['message'] = $constant;
         
@@ -53,7 +51,7 @@ class Message
                     <?= $_SESSION['save']['message']; ?>
                 </div> <?php
             }
-            session_destroy();
+            unset($_SESSION['save']);
         }
     }
 }

@@ -9,4 +9,5 @@ return [
     'GET|/remover' => \HackbartPR\Controller\RemoveVideoController::class,
     'GET|/login' => \HackbartPR\Controller\LoginController::class,
     'POST|/login' => \HackbartPR\Controller\VerifyLoginController::class,
+    'GET|/logout' => \HackbartPR\Controller\LogoutController::class,
 ];
