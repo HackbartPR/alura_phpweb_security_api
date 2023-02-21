@@ -2,16 +2,19 @@
 
 namespace HackbartPR\Controller;
 
+use HackbartPR\Utils\Message;
 use HackbartPR\Interfaces\Controller;
 use HackbartPR\Repository\PDOVideoRepository;
 
 class SendVideoController implements Controller
 {
+    private Message $message;
     private PDOVideoRepository $repository;
 
-    public function __construct(PDOVideoRepository $repository)
+    public function __construct(PDOVideoRepository $repository, Message $message)
     {
         $this->repository = $repository;
+        $this->message = $message;
     }
 
     public function processRequest(): void
@@ -24,6 +27,8 @@ class SendVideoController implements Controller
         }
                 
         require_once __DIR__ . '/../../view/sendVideo.php';
+
+        $this->message->show();
     }
 
     private function validation(): array

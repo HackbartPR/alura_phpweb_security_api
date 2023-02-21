@@ -6,11 +6,11 @@ class Auth
 {
     public static function isLogged(): bool
     {
-        if (!$_SESSION['logged']) {            
-            return false;
+        if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']) {            
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public static function login(): void

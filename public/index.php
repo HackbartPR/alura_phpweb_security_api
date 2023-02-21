@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use HackbartPR\Utils\Auth;
+use HackbartPR\Utils\Image;
 use HackbartPR\Utils\Message;
 use HackbartPR\Config\ConnectionCreator;
 use HackbartPR\Controller\LoginController;
@@ -23,6 +24,7 @@ $path = $_SERVER['PATH_INFO'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'];
 
 $auth = new Auth();
+$image = new Image();
 $message = new Message();
 $conn = ConnectionCreator::createConnection();
 
@@ -46,8 +48,10 @@ if (array_key_exists("$method|$path", $router)) {
         $controller = new $routerClass($message, $auth);
     } else if ($path === '/logout'){
         $controller = new $routerClass($auth);
+    } else if (($path === '/novo' || $path === '/editar')&& $method === 'POST') {
+        $controller = new $routerClass($repository, $message, $image);   
     } else {
-        $controller = new $routerClass($repository, $message, $auth);
+        $controller = new $routerClass($repository, $message, $auth, $image);
     }    
 } else {    
     $controller = new Response404Controller();
