@@ -46,7 +46,11 @@ class NewVideoController implements Controller
 
         $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
         $title = filter_input(INPUT_POST, 'titulo');
-        $image_path = $_FILES['image'] ?? null;
+        
+        $image_path = null;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] !== 4) {
+            $image_path = $_FILES['image'];
+        }         
 
         if (!$url) {
             $this->message::create($this->message::URL_FAIL);
