@@ -10,4 +10,5 @@ return [
     'GET|/login' => \HackbartPR\Controller\LoginController::class,
     'POST|/login' => \HackbartPR\Controller\VerifyLoginController::class,
     'GET|/logout' => \HackbartPR\Controller\LogoutController::class,
+    'GET|/json-videos' => \HackbartPR\Controller\JsonVideoListController::class,
 ];

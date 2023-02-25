@@ -19,6 +19,7 @@ use HackbartPR\Controller\UpdateVideoController;
 use HackbartPR\Controller\VerifyLoginController;
 
 session_start();
+session_regenerate_id();
 
 $path = $_SERVER['PATH_INFO'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'];

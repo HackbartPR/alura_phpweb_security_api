@@ -13,7 +13,7 @@ class Image
         if ($file['error'] !== UPLOAD_ERR_OK) {
             return false;
         }
-
+        
         $info = getimagesize($file['tmp_name']);        
 
         if (!$info) {
